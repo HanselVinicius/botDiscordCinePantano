@@ -1,0 +1,48 @@
+services:
+  bot:
+    image: node:22.11.0-alpine
+    container_name: bot
+    working_dir: /opt/src/app
+    volumes:
+      - .:/opt/src/app
+      - node_modules:/opt/src/app/node_modules 
+    environment:
+      - NODE_ENV=dev
+    command: sh -c "npm install -g pnpm && pnpm install --silent && pnpm run start:dev"
+    networks:
+      - cine_pantano_network
+    depends_on:
+      - rabbitmq
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-cine-pantano
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - cine_pantano_network
+
+  db:
+    image: mariadb:latest
+    container_name: db
+    environment:
+      MARIADB_USER: user
+      MARIADB_PASSWORD: mariadbPW
+      MARIADB_ROOT_PASSWORD: mariadbrootPW
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - cine_pantano_network
+
+volumes:
+  mariadb-data:
+    driver: local
+  node_modules:
+    driver: local
+
+networks:
+  cine_pantano_network:
+    driver: bridge
