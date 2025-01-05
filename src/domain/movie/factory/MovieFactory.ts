@@ -1,4 +1,4 @@
-import { AddMovieDto } from 'src/entrypoint/movie/dto/AddMovieDto';
+import { AddMovieDto } from '../dto/AddMovieDto';
 import { Movie } from '../Movie';
 
 export class MovieFactory {

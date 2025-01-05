@@ -1,9 +1,9 @@
 import { Handler, IA, SubCommand } from '@discord-nestjs/core';
-import { AddMovieDto } from './dto/AddMovieDto';
 import { SlashCommandPipe } from '@discord-nestjs/common';
 import { AddMovieService } from 'src/domain/movie/service/AddMovieService';
 import { MovieFactory } from 'src/domain/movie/factory/MovieFactory';
 import { Inject } from '@nestjs/common';
+import { AddMovieDto } from './dto/AddMovieDto';
 
 @SubCommand({
   name: 'add',
