@@ -8,7 +8,7 @@ export class BotGateway {
   ) {}
 
   @Once('ready')
-  public onReady(): void {
+  public async onReady(): Promise<void> {
     this.client.login(process.env.DISCORD_TOKEN);
   }
 }

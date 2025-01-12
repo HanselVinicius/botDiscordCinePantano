@@ -1,7 +1,7 @@
-import { CommandInteraction } from "discord.js";
-import { PingCommand } from "./PingCommand";
+import { CommandInteraction } from 'discord.js';
+import { PingCommand } from './PingCommand';
 
-describe('PingCommand',() =>{
+describe('PingCommand', () => {
   let pingCommand: PingCommand;
   let interaction: jest.Mocked<CommandInteraction>;
 

@@ -1,5 +1,5 @@
 import { connect, Connection, Channel } from 'amqplib';
-import { Queue, QUEUES } from "../../shared/queues";
+import { Queue, QUEUES } from '../../shared/queues';
 import { AmqpException } from '../exception/AmqpException';
 
 export class AmqpManager {

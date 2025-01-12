@@ -13,7 +13,9 @@ describe('BotGateway', () => {
   });
 
   it('should call client.login when the ready event is emitted', () => {
-    const loginSpy = jest.spyOn(client, 'login').mockResolvedValueOnce(undefined);
+    const loginSpy = jest
+      .spyOn(client, 'login')
+      .mockResolvedValueOnce(undefined);
 
     botGateway.onReady();
 

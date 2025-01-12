@@ -1,6 +1,6 @@
-import { QUEUES } from "../../shared/queues";
-import { AmqpClient } from "./AmqpClient";
-import { AmqpManager } from "./AmqpManager";
+import { QUEUES } from '../../shared/queues';
+import { AmqpClient } from './AmqpClient';
+import { AmqpManager } from './AmqpManager';
 
 describe('AmqpClient', () => {
   let amqpClient: AmqpClient;

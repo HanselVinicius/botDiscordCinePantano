@@ -4,8 +4,8 @@ import { Movie } from 'src/domain/movie/Movie';
 import { MOVIE_QUEUE } from '../../shared/queues';
 
 export class AddMovieGatewayImpl implements AddMovieGateway {
-  constructor(private readonly amqpClient: AmqpClient){}
-  
+  constructor(private readonly amqpClient: AmqpClient) {}
+
   public async addMovie(movie: Movie): Promise<void> {
     await this.amqpClient.sendToQueue(MOVIE_QUEUE, JSON.stringify(movie));
   }

@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { AmqpManager } from './AmqpManager';
-import { QUEUES } from "../../shared/queues";
+import { QUEUES } from '../../shared/queues';
 
 @Injectable()
 export class AmqpClient {
-
-  constructor(private readonly amqpManager: AmqpManager ){}
+  constructor(private readonly amqpManager: AmqpManager) {}
 
   public async sendToQueue(queue: string, message: string): Promise<void> {
     await this.connect();
