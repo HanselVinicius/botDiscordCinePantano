@@ -1,11 +1,11 @@
 import { DiscordModule } from '@discord-nestjs/core';
 import { Module } from '@nestjs/common';
-import { AddMovieSubCommand } from 'src/entrypoint/movie/AddMovieSubCommand';
+import { InsertMovieSubCommand } from 'src/entrypoint/movie/InsertMovieSubCommand';
 import { MovieCommand } from 'src/entrypoint/movie/MovieCommand';
-import { AddMovieProvider } from './provider/movie/AddMovieProvider';
+import { InsertMovieProvider } from './provider/movie/InsertMovieProvider';
 
 @Module({
   imports: [DiscordModule.forFeature()],
-  providers: [MovieCommand, AddMovieSubCommand, ...AddMovieProvider],
+  providers: [MovieCommand, InsertMovieSubCommand, ...InsertMovieProvider],
 })
 export class MovieModule {}

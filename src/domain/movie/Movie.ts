@@ -5,7 +5,7 @@ export class Movie {
     public readonly title: string,
     public readonly launchDate: Date,
     public readonly duration: number,
-    public readonly id?: number,
+    public readonly id?: BigInt | number,
     public readonly review?: Review[],
   ) {}
 }

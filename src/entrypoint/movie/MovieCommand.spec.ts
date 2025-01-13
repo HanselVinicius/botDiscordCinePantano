@@ -1,13 +1,13 @@
-import { AddMovieService } from '../../domain/movie/service/AddMovieService';
-import { AddMovieSubCommand } from './AddMovieSubCommand';
+import { InsertMovieService } from '../../domain/movie/service/InsertMovieService';
+import { InsertMovieSubCommand } from './InsertMovieSubCommand';
 import { Movie } from '../../domain/movie/Movie';
-import { AddMovieDto } from './dto/AddMovieDto';
+import { insertMovieDto } from './dto/insertMovieDto';
 
 describe('MovieCommands', () => {
-  describe('AddMovieSubCommand', () => {
-    let addMovieSubCommand: AddMovieSubCommand;
-    let addMovieServiceMock: jest.Mocked<AddMovieService>;
-    const movieDto: AddMovieDto = {
+  describe('InsertMovieSubCommand', () => {
+    let insertMovieSubCommand: InsertMovieSubCommand;
+    let addMovieServiceMock: jest.Mocked<InsertMovieService>;
+    const movieDto: insertMovieDto = {
       title: 'movieName',
       launch_date: '10/10/2024',
       duration: 120,
@@ -15,8 +15,8 @@ describe('MovieCommands', () => {
     let movie: Movie;
     beforeEach(async () => {
       addMovieServiceMock = {
-        addMovie: jest.fn().mockResolvedValueOnce(undefined),
-      } as unknown as jest.Mocked<AddMovieService>;
+        insertMovie: jest.fn().mockResolvedValueOnce(undefined),
+      } as unknown as jest.Mocked<InsertMovieService>;
       movie = new Movie(
         movieDto.title,
         new Date('2024-10-10'),
@@ -24,9 +24,9 @@ describe('MovieCommands', () => {
       );
     });
     it('should return a message with the movie name', async () => {
-      addMovieSubCommand = new AddMovieSubCommand(addMovieServiceMock);
+      insertMovieSubCommand = new InsertMovieSubCommand(addMovieServiceMock);
 
-      const response = await addMovieSubCommand.execute(movieDto);
+      const response = await insertMovieSubCommand.execute(movieDto);
       expect(response).toBe(`
     🎬 **${movieDto.title}** foi adicionado à lista de filmes para assistir!
     🗓️ *Data de Lançamento:* **${movieDto.launch_date}**  
@@ -34,10 +34,10 @@ describe('MovieCommands', () => {
     });
 
     it('should return an error with invalid launchDate', async () => {
-      addMovieSubCommand = new AddMovieSubCommand(addMovieServiceMock);
+      insertMovieSubCommand = new InsertMovieSubCommand(addMovieServiceMock);
       movieDto.launch_date = '10-10-2024';
 
-      const response = await addMovieSubCommand.execute(movieDto);
+      const response = await insertMovieSubCommand.execute(movieDto);
 
       expect(response).toBe(
         '❌ **Erro:** Invalid date format. Expected dd/mm/yyyy ⚠️',

@@ -1,26 +1,26 @@
-import { AddMovieDto } from '../dto/AddMovieDto';
+import { InsertMovieDto } from '../dto/InsertMovieDto';
 import { MovieFactory } from './MovieFactory';
 
 describe('MovieFactory', () => {
   it('should sucessfully create a movie', () => {
-    const addMovieDto: AddMovieDto = {
+    const insertMovieDto: InsertMovieDto = {
       title: 'The Godfather',
       launch_date: '24/03/1972',
       duration: 175,
-    } as AddMovieDto;
-    const movie = MovieFactory.createMovie(addMovieDto);
+    } as InsertMovieDto;
+    const movie = MovieFactory.createMovie(insertMovieDto);
     expect(movie.title).toBe('The Godfather');
     expect(movie.launchDate).toEqual(new Date('1972-03-24'));
     expect(movie.duration).toBe(175);
   });
 
   it('should throw an error when the date format is invalid', () => {
-    const addMovieDto: AddMovieDto = {
+    const insertMovieDto: InsertMovieDto = {
       title: 'The Godfather',
       launch_date: '24-03-1972',
       duration: 175,
-    } as AddMovieDto;
-    expect(() => MovieFactory.createMovie(addMovieDto)).toThrow(
+    } as InsertMovieDto;
+    expect(() => MovieFactory.createMovie(insertMovieDto)).toThrow(
       'Invalid date format. Expected dd/mm/yyyy',
     );
   });
