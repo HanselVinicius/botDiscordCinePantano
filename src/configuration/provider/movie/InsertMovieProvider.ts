@@ -8,7 +8,9 @@ import { InsertMovieGatewayImpl } from 'src/gateway/movie/InsertMovieGatewayImpl
 export const InsertMovieProvider: Provider[] = [
   {
     provide: 'InsertMovieService',
-    useFactory: (insertMovieGateway: InsertMovieGateway): InsertMovieUseCase => {
+    useFactory: (
+      insertMovieGateway: InsertMovieGateway,
+    ): InsertMovieUseCase => {
       return new InsertMovieUseCase(insertMovieGateway);
     },
     inject: ['InsertMovieGateway'],

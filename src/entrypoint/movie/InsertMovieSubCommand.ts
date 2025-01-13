@@ -3,7 +3,7 @@ import { SlashCommandPipe } from '@discord-nestjs/common';
 import { InsertMovieService } from '../../domain/movie/service/InsertMovieService';
 import { MovieFactory } from '../../domain/movie/factory/MovieFactory';
 import { Inject } from '@nestjs/common';
-import { insertMovieDto } from './dto/insertMovieDto';
+import { InsertMovieDto } from './dto/InsertMovieDto';
 
 @SubCommand({
   name: 'add',
@@ -17,7 +17,7 @@ export class InsertMovieSubCommand {
 
   @Handler()
   public async execute(
-    @IA(SlashCommandPipe) options: insertMovieDto,
+    @IA(SlashCommandPipe) options: InsertMovieDto,
   ): Promise<string> {
     try {
       const movie = MovieFactory.createMovie(options);

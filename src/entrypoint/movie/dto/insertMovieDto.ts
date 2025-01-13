@@ -1,6 +1,6 @@
 import { Param, ParamType } from '@discord-nestjs/core';
 
-export class insertMovieDto {
+export class InsertMovieDto {
   @Param({
     name: 'title',
     description: 'Title of the movie',
