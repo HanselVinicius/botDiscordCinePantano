@@ -5,7 +5,7 @@ export interface Queue {
 }
 
 export const MOVIE_QUEUE = 'movieQueue';
-
+export const MESSAGE_QUEUE = 'messageQueue';
 export const QUEUES: Map<string, Queue> = new Map<string, Queue>([
   [
     MOVIE_QUEUE,
@@ -13,6 +13,14 @@ export const QUEUES: Map<string, Queue> = new Map<string, Queue>([
       name: 'movieQueue',
       exchange: 'movieExchange',
       routingKey: 'movie',
+    },
+  ],
+  [
+    MESSAGE_QUEUE,
+    {
+      name: 'messageQueue',
+      exchange: 'messageExchange',
+      routingKey: 'message',
     },
   ],
 ]);

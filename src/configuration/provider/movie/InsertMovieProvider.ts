@@ -1,5 +1,5 @@
 import { Provider } from '@nestjs/common';
-import { InsertMovieGateway } from 'src/application/gateway/InsertMovieGateway';
+import { InsertMovieGateway } from 'src/application/gateway/movie/InsertMovieGateway';
 import { InsertMovieUseCase } from 'src/application/movie/InsertMovieUseCase';
 import { AmqpClient } from 'src/configuration/amqp/AmqpClient';
 import { AmqpManager } from 'src/configuration/amqp/AmqpManager';

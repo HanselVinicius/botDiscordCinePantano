@@ -1,5 +1,5 @@
 import { InsertMovieUseCase } from './InsertMovieUseCase';
-import { InsertMovieGateway } from '../gateway/InsertMovieGateway';
+import { InsertMovieGateway } from '../gateway/movie/InsertMovieGateway';
 import { Movie } from '../../domain/movie/Movie';
 
 describe('InsertMovieUseCase', () => {

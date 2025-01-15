@@ -1,6 +1,6 @@
 import { InsertMovieService } from 'src/domain/movie/service/InsertMovieService';
 import { Movie } from 'src/domain/movie/Movie';
-import { InsertMovieGateway } from '../gateway/InsertMovieGateway';
+import { InsertMovieGateway } from '../gateway/movie/InsertMovieGateway';
 
 export class InsertMovieUseCase implements InsertMovieService {
   constructor(private readonly sendMovieGateway: InsertMovieGateway) {}

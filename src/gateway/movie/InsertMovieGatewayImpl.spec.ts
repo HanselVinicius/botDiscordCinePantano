@@ -1,4 +1,4 @@
-import { InsertMovieGateway } from '../../application/gateway/InsertMovieGateway';
+import { InsertMovieGateway } from '../../application/gateway/movie/InsertMovieGateway';
 import { Movie } from '../../domain/movie/Movie';
 import { InsertMovieGatewayImpl } from './InsertMovieGatewayImpl';
 import { AmqpClient } from '../../configuration/amqp/AmqpClient';

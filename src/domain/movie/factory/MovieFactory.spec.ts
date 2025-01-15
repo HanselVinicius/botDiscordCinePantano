@@ -8,7 +8,7 @@ describe('MovieFactory', () => {
       launch_date: '24/03/1972',
       duration: 175,
     } as InsertMovieDto;
-    const movie = MovieFactory.createMovie(insertMovieDto);
+    const movie = MovieFactory.createMovieFromInsert(insertMovieDto);
     expect(movie.title).toBe('The Godfather');
     expect(movie.launchDate).toEqual(new Date('1972-03-24'));
     expect(movie.duration).toBe(175);
@@ -20,7 +20,7 @@ describe('MovieFactory', () => {
       launch_date: '24-03-1972',
       duration: 175,
     } as InsertMovieDto;
-    expect(() => MovieFactory.createMovie(insertMovieDto)).toThrow(
+    expect(() => MovieFactory.createMovieFromInsert(insertMovieDto)).toThrow(
       'Invalid date format. Expected dd/mm/yyyy',
     );
   });

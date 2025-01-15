@@ -1,7 +1,7 @@
-import { Author } from '../author/Author';
-import { Attachment } from './Attachment';
+import { Author } from 'src/domain/author/Author';
+import { Attachment } from '../Attachment';
 
-export class Message {
+export class InsertMessageDto {
   constructor(
     public readonly id: number,
     public readonly content: string,

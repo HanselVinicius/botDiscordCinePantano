@@ -1,9 +1,9 @@
 export class Attachment {
   constructor(
-    private readonly id: bigint | number,
-    private readonly attachment: string,
-    private readonly name: string,
-    private readonly size: number,
-    private readonly url: string,
+    public readonly id: number,
+    public readonly attachment: string,
+    public readonly name: string,
+    public readonly size: number,
+    public readonly url: string,
   ) {}
 }

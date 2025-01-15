@@ -20,7 +20,7 @@ export class InsertMovieSubCommand {
     @IA(SlashCommandPipe) options: InsertMovieDto,
   ): Promise<string> {
     try {
-      const movie = MovieFactory.createMovie(options);
+      const movie = MovieFactory.createMovieFromInsert(options);
       await this.sendMovieService.insertMovie(movie);
       return `
     🎬 **${options.title}** foi adicionado à lista de filmes para assistir!

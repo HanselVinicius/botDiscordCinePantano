@@ -20,20 +20,22 @@ export class AmqpManager {
 
   public async createQueue(): Promise<void> {
     try {
-      const queues = QUEUES;
-      queues.forEach(async (queue) => {
-        await this.channel.assertExchange(queue.exchange, 'direct', {
-          durable: true,
-        });
-        await this.channel.assertQueue(queue.name, {
-          durable: true,
-        });
-        await this.channel.bindQueue(
-          queue.name,
-          queue.exchange,
-          queue.routingKey,
-        );
-      });
+      const queues = Array.from(QUEUES.values());
+      await Promise.all(
+        queues.map(async (queue) => {
+          await this.channel.assertExchange(queue.exchange, 'direct', {
+            durable: true,
+          });
+          await this.channel.assertQueue(queue.name, {
+            durable: true,
+          });
+          await this.channel.bindQueue(
+            queue.name,
+            queue.exchange,
+            queue.routingKey,
+          );
+        }),
+      );
     } catch (error) {
       console.error('Erro ao criar a fila:', error);
       throw new AmqpException('Erro ao criar a fila');
