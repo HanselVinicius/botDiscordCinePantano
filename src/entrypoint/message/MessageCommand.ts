@@ -1,11 +1,11 @@
 import { Command, EventParams, Handler } from '@discord-nestjs/core';
 import { Inject } from '@nestjs/common';
 import { ClientEvents } from 'discord.js';
-import { Author } from 'src/domain/author/Author';
-import { Attachment } from 'src/domain/message/Attachment';
-import { InsertMessageDto } from 'src/domain/message/dto/InsertMessageDto';
-import { MessageFactory } from 'src/domain/message/factory/MessageFactory';
-import { InsertMessageService } from 'src/domain/message/service/InsertMessageService';
+import { Author } from '../../domain/author/Author';
+import { Attachment } from '../../domain/message/Attachment';
+import { InsertMessageDto } from '../../domain/message/dto/InsertMessageDto';
+import { MessageFactory } from '../../domain/message/factory/MessageFactory';
+import { InsertMessageService } from '../../domain/message/service/InsertMessageService';
 @Command({
   name: 'scrap',
   description: 'Scraps a text channel',
@@ -39,10 +39,10 @@ export class MessageCommand {
           message.attachments.map((attachmentItem) => {
             return new Attachment(
               parseInt(attachmentItem.id),
-              attachmentItem.url,
+              attachmentItem.contentType,
               attachmentItem.name,
               attachmentItem.size,
-              attachmentItem.contentType,
+              attachmentItem.url,
             );
           }),
         );
@@ -52,7 +52,7 @@ export class MessageCommand {
       });
       return `oi ${args[0].user.username}, ${messages.size} mensagens foram coletadas`;
     } catch (e) {
-      console.log(e);
+      console.error(e);
       return 'deu ruim';
     }
   }

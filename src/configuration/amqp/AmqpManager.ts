@@ -58,7 +58,6 @@ export class AmqpManager {
         },
       );
     } catch (error) {
-      console.error('Erro ao enviar mensagem para a exchange:', error);
       throw new AmqpException('Erro ao enviar mensagem para a exchange');
     }
   }
