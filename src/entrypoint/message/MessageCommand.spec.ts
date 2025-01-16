@@ -62,7 +62,6 @@ describe('MessageCommand', () => {
     });
 
     it('should handle errors and return a failure message', async () => {
-      // Simulate an error during message fetching
       (mockArgs[0].channel.messages.fetch as jest.Mock).mockRejectedValue(new Error('Fetch failed'));
 
       const response = await messageCommand.execute(mockArgs);
@@ -93,7 +92,7 @@ describe('MessageCommand', () => {
           parseInt(message.author.id),
           message.author.username,
           message.author.bot,
-          null
+          []
         ),
         message.createdAt,
         message.attachments.map((attachment) =>{ 

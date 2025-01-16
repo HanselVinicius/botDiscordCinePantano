@@ -33,7 +33,7 @@ export class MessageCommand {
             parseInt(message.author.id),
             message.author.username,
             message.author.bot,
-            null,
+            [],
           ),
           message.createdAt,
           message.attachments.map((attachmentItem) => {
