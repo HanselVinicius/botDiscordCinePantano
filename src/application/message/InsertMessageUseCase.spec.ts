@@ -3,6 +3,7 @@ import { Message } from '../../domain/message/Message';
 import { InsertMessageUseCase } from './InsertMessageUseCase';
 import { InsertMessageGateway } from '../gateway/message/InsertMessageGateway';
 import { Attachment } from '../../domain/message/Attachment';
+import { MessageType } from '../../domain/message/vo/MessageType';
 
 describe('InsertMessageUseCase', () => {
   const message = new Message(
@@ -12,6 +13,7 @@ describe('InsertMessageUseCase', () => {
     1,
     new Author(1, 'name', false, null),
     new Date('2021-01-01'),
+    MessageType.MOVIE,
     [new Attachment(1, 'name', 'type', 100, 'url')],
   );
 

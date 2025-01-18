@@ -12,6 +12,7 @@ describe('InsertMessageGatewayImpl', () => {
     1,
     new Author(1, 'name', false, null),
     new Date('2021-01-01'),
+    null,
     [],
   );
 

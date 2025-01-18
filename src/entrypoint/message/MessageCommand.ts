@@ -1,4 +1,4 @@
-import { Command, EventParams, Handler } from '@discord-nestjs/core';
+import { Command, EventParams, Handler, IA } from '@discord-nestjs/core';
 import { Inject } from '@nestjs/common';
 import { ClientEvents } from 'discord.js';
 import { Author } from '../../domain/author/Author';
@@ -6,6 +6,8 @@ import { Attachment } from '../../domain/message/Attachment';
 import { InsertMessageDto } from '../../domain/message/dto/InsertMessageDto';
 import { MessageFactory } from '../../domain/message/factory/MessageFactory';
 import { InsertMessageService } from '../../domain/message/service/InsertMessageService';
+import { SlashCommandPipe } from '@discord-nestjs/common';
+import { InsertMessageOptionsDto } from './dto/InsertMessageOptionsDto';
 @Command({
   name: 'scrap',
   description: 'Scraps a text channel',
@@ -18,6 +20,7 @@ export class MessageCommand {
 
   @Handler()
   async execute(
+    @IA(SlashCommandPipe) options: InsertMessageOptionsDto,
     @EventParams() args: ClientEvents['interactionCreate'],
   ): Promise<string> {
     try {
@@ -46,8 +49,11 @@ export class MessageCommand {
             );
           }),
         );
-        const messageDomain =
-          MessageFactory.createMessageFromInsert(insertMessageDto);
+        const messageDomain = MessageFactory.createMessageFromInsert(
+          insertMessageDto,
+          options.messageType,
+        );
+        console.log(messageDomain);
         this.insertMessageService.insertMessage(messageDomain);
       });
       return `oi ${args[0].user.username}, ${messages.size} mensagens foram coletadas`;

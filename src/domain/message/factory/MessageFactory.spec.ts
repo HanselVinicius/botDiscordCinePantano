@@ -1,5 +1,6 @@
 import { Author } from '../../author/Author';
 import { InsertMessageDto } from '../dto/InsertMessageDto';
+import { MessageType } from '../vo/MessageType';
 import { MessageFactory } from './MessageFactory';
 
 describe('MessageFactory', () => {
@@ -16,7 +17,10 @@ describe('MessageFactory', () => {
     );
 
     // Act
-    const message = MessageFactory.createMessageFromInsert(insertMessageDto);
+    const message = MessageFactory.createMessageFromInsert(
+      insertMessageDto,
+      MessageType.MOVIE,
+    );
 
     //assert
     expect(message.id).toBe(insertMessageDto.id);

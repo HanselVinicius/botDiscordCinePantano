@@ -9,7 +9,6 @@ jest.mock('amqplib', () => ({
 }));
 
 describe('AmqpManager', () => {
-
   let amqpManager: AmqpManager;
   let mockChannel: jest.Mocked<Channel>;
   let mockConnection: jest.Mocked<Connection>;
@@ -40,8 +39,12 @@ describe('AmqpManager', () => {
     it('should throw AmqpException when connection fails', async () => {
       (connect as jest.Mock).mockRejectedValue(new Error('Connection failed'));
 
-      await expect(amqpManager.connect('amqp://localhost')).rejects.toThrow(AmqpException);
-      await expect(amqpManager.connect('amqp://localhost')).rejects.toThrow('Erro ao conectar ao RabbitMQ');
+      await expect(amqpManager.connect('amqp://localhost')).rejects.toThrow(
+        AmqpException,
+      );
+      await expect(amqpManager.connect('amqp://localhost')).rejects.toThrow(
+        'Erro ao conectar ao RabbitMQ',
+      );
     });
   });
 
@@ -56,10 +59,14 @@ describe('AmqpManager', () => {
     });
 
     it('should throw AmqpException when creating the queue fails', async () => {
-      mockChannel.assertExchange.mockRejectedValueOnce(new Error('Queue creation failed'));
+      mockChannel.assertExchange.mockRejectedValueOnce(
+        new Error('Queue creation failed'),
+      );
 
       await expect(amqpManager.createQueue()).rejects.toThrow(AmqpException);
-      await expect(amqpManager.createQueue()).rejects.toThrow('Erro ao criar a fila');
+      await expect(amqpManager.createQueue()).rejects.toThrow(
+        'Erro ao criar a fila',
+      );
     });
   });
 
@@ -77,7 +84,7 @@ describe('AmqpManager', () => {
       'test_exchange',
       'test_routing_key',
       expect.any(Buffer),
-      { persistent: true }
+      { persistent: true },
     );
   });
 
@@ -90,8 +97,14 @@ describe('AmqpManager', () => {
 
     const amqpManagerWithoutChannel = new AmqpManager();
 
-    await expect(amqpManagerWithoutChannel.sendMessage('Hello, world!', mockQueue)).rejects.toThrow(AmqpException);
-    await expect(amqpManagerWithoutChannel.sendMessage('Hello, world!', mockQueue)).rejects.toThrow('Canal não está disponível. Conecte-se ao RabbitMQ primeiro.');
+    await expect(
+      amqpManagerWithoutChannel.sendMessage('Hello, world!', mockQueue),
+    ).rejects.toThrow(AmqpException);
+    await expect(
+      amqpManagerWithoutChannel.sendMessage('Hello, world!', mockQueue),
+    ).rejects.toThrow(
+      'Canal não está disponível. Conecte-se ao RabbitMQ primeiro.',
+    );
   });
 
   it('should throw AmqpException when message sending fails', async () => {
@@ -101,9 +114,17 @@ describe('AmqpManager', () => {
       name: 'test_queue',
     };
 
-    (mockChannel.publish as jest.Mock).mockRejectedValue(new AmqpException('Publish failed'));
+    (mockChannel.publish as jest.Mock).mockRejectedValue(
+      new AmqpException('Publish failed'),
+    );
 
-    await expect(amqpManager.sendMessage('Hello, world!', mockQueue)).rejects.toThrow(AmqpException);
-    await expect(amqpManager.sendMessage('Hello, world!', mockQueue)).rejects.toThrow('Canal não está disponível. Conecte-se ao RabbitMQ primeiro.');
+    await expect(
+      amqpManager.sendMessage('Hello, world!', mockQueue),
+    ).rejects.toThrow(AmqpException);
+    await expect(
+      amqpManager.sendMessage('Hello, world!', mockQueue),
+    ).rejects.toThrow(
+      'Canal não está disponível. Conecte-se ao RabbitMQ primeiro.',
+    );
   });
 });

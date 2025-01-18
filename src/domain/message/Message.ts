@@ -1,5 +1,6 @@
 import { Author } from '../author/Author';
 import { Attachment } from './Attachment';
+import { MessageType } from './vo/MessageType';
 
 export class Message {
   constructor(
@@ -9,6 +10,7 @@ export class Message {
     public readonly guildId: number,
     public readonly author: Author,
     public readonly timestamp: Date,
+    public readonly messageType: MessageType,
     public readonly attachment?: Attachment[],
   ) {}
 }
