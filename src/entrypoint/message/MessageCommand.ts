@@ -53,7 +53,6 @@ export class MessageCommand {
           insertMessageDto,
           options.messageType,
         );
-        console.log(messageDomain);
         this.insertMessageService.insertMessage(messageDomain);
       });
       return `oi ${args[0].user.username}, ${messages.size} mensagens foram coletadas`;
