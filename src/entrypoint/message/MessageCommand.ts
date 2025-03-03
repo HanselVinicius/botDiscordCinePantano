@@ -1,6 +1,6 @@
 import { Command, EventParams, Handler, IA } from '@discord-nestjs/core';
 import { Inject } from '@nestjs/common';
-import { ClientEvents } from 'discord.js';
+import { ClientEvents, Message } from 'discord.js';
 import { Author } from '../../domain/author/Author';
 import { Attachment } from '../../domain/message/Attachment';
 import { InsertMessageDto } from '../../domain/message/dto/InsertMessageDto';
@@ -27,28 +27,7 @@ export class MessageCommand {
       const channel = args[0].channel;
       const messages = await channel.messages.fetch({ limit: 100 });
       messages.forEach((message) => {
-        const insertMessageDto = new InsertMessageDto(
-          parseInt(message.id),
-          message.content,
-          parseInt(message.channelId),
-          parseInt(message.guildId),
-          new Author(
-            parseInt(message.author.id),
-            message.author.username,
-            message.author.bot,
-            [],
-          ),
-          message.createdAt,
-          message.attachments.map((attachmentItem) => {
-            return new Attachment(
-              parseInt(attachmentItem.id),
-              attachmentItem.contentType,
-              attachmentItem.name,
-              attachmentItem.size,
-              attachmentItem.url,
-            );
-          }),
-        );
+        const insertMessageDto = this.createMessageDto(message);
         const messageDomain = MessageFactory.createMessageFromInsert(
           insertMessageDto,
           options.messageType,
@@ -60,5 +39,30 @@ export class MessageCommand {
       console.error(e);
       return 'deu ruim';
     }
+  }
+
+  private createMessageDto(message: Message<true>): InsertMessageDto {
+    return new InsertMessageDto(
+      parseInt(message.id),
+      message.content,
+      parseInt(message.channelId),
+      parseInt(message.guildId),
+      new Author(
+        parseInt(message.author.id),
+        message.author.username,
+        message.author.bot,
+        [],
+      ),
+      message.createdAt,
+      message.attachments.map((attachmentItem) => {
+        return new Attachment(
+          parseInt(attachmentItem.id),
+          attachmentItem.contentType,
+          attachmentItem.name,
+          attachmentItem.size,
+          attachmentItem.url,
+        );
+      }),
+    );
   }
 }
