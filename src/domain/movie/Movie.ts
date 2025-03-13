@@ -9,5 +9,6 @@ export class Movie {
     public status: MovieStatus = MovieStatus.TO_WATCH,
     public readonly id?: number,
     public readonly review?: Review[],
+    public readonly image?: string
   ) {}
 }

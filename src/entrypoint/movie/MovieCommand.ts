@@ -1,5 +1,6 @@
 import { Command, UseGroup } from '@discord-nestjs/core';
 import { InsertMovieSubCommand } from './InsertMovieSubCommand';
+import { GetMovieSubCommand } from './GetMovieSubCommand';
 
 @Command({
   name: 'movie',
@@ -11,6 +12,7 @@ import { InsertMovieSubCommand } from './InsertMovieSubCommand';
         description: 'CRUD of movies',
       },
       InsertMovieSubCommand,
+      GetMovieSubCommand
     ),
   ],
 })

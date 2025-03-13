@@ -25,7 +25,8 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/core": "^10.0.0",
     "@nestjs/platform-express": "^10.0.0",
-    "amqplib": "^0.10.5", 
+    "amqplib": "^0.10.5",
+    "axios": "^1.8.2",
     "discord.js": "^14.16.3",
     "husky": "^9.1.7",
     "reflect-metadata": "^0.2.0",
@@ -66,20 +67,23 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
+    "moduleNameMapper": {
+      "^src/(.*)$": "<rootDir>/$1"
+    },
     "coverageThreshold": {
-            "global": {
-                "branches": 70,
-                "functions": 70,
-                "lines": 70,
-                "statements": 70
-            }
-        },
-        "coveragePathIgnorePatterns": [
-            "/node_modules/",
-            "src/main.ts",
-            "src/(.+?)\\.module\\.(t|j)s",
-            "src/configuration/provider/.*\\.ts$"
-        ],
+      "global": {
+        "branches": 70,
+        "functions": 70,
+        "lines": 70,
+        "statements": 70
+      }
+    },
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "src/main.ts",
+      "src/(.+?)\\.module\\.(t|j)s",
+      "src/configuration/provider/.*\\.ts$"
+    ],
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],
