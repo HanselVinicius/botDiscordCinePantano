@@ -15,18 +15,22 @@ services:
       - '3000:3000'
     depends_on:
       - rabbitmq
+      - db
     restart: unless-stopped
   api:
-      build:
-        context: ../cinePantanoApplication
-        dockerfile: Dockerfile
-      container_name: api
-      working_dir: /opt/src/app
-      networks:
-        - cine_pantano_network
-      ports:
-        - "8080:8080"
-      restart: unless-stopped
+    build:
+      context: ../cinePantanoApplication
+      dockerfile: Dockerfile
+    container_name: api
+    working_dir: /opt/src/app
+    networks:
+      - cine_pantano_network
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    depends_on:
+      - db
+      - rabbitmq
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -40,6 +44,13 @@ services:
     networks:
       - cine_pantano_network
     restart: unless-stopped
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
 
   db:
     image: mariadb:latest
@@ -55,8 +66,16 @@ services:
     networks:
       - cine_pantano_network
     restart: unless-stopped
+    healthcheck:
+        test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+        start_period: 10s
+        interval: 10s
+        timeout: 5s
+        retries: 3
 
 volumes:
+  rabbitmq-data:
+    driver: local
   mariadb-data:
     driver: local
   node_modules:
