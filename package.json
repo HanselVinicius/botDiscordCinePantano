@@ -67,15 +67,6 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "roots": [
-      "<rootDir>"
-    ],
-    "modulePaths": [
-      "<rootDir>"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ],
     "moduleNameMapper": {
       "^src/(.*)$": "<rootDir>/$1"
     },
