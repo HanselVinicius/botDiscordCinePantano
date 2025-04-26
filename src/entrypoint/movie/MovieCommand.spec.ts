@@ -1,6 +1,6 @@
 import { InsertMovieService } from '../../domain/movie/service/InsertMovieService';
-import { InsertMovieSubCommand } from './InsertMovieSubCommand';
 import { InsertMovieDto } from './dto/InsertMovieDto';
+import { InsertMovieSubCommand } from './InsertMovieSubCommand';
 
 describe('MovieCommands', () => {
   describe('InsertMovieSubCommand', () => {

@@ -5,9 +5,9 @@ import { Author } from '../../domain/author/Author';
 import { Attachment } from '../../domain/message/Attachment';
 import { InsertMessageDto } from '../../domain/message/dto/InsertMessageDto';
 import { MessageFactory } from '../../domain/message/factory/MessageFactory';
-import { InsertMessageService } from '../../domain/message/service/InsertMessageService';
 import { SlashCommandPipe } from '@discord-nestjs/common';
 import { InsertMessageOptionsDto } from './dto/InsertMessageOptionsDto';
+import { InsertMessageService } from 'src/domain/message/service/InsertMessageService';
 @Command({
   name: 'scrap',
   description: 'Scraps a text channel',
