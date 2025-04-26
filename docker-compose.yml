@@ -28,6 +28,18 @@ services:
     ports:
       - "8080:8080"
     restart: unless-stopped
+    environment:
+      - DB_NAME=pantano
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_USER=root
+      - DB_PASSWORD=mariadbrootPW
+      - AMQP_HOST=rabbitmq
+      - AMQP_PORT=5672
+      - AMQP_USER=user
+      - AMQP_PASSWORD=rabbitmqPW
+      - JWT_SECRET=secret
+      - JWT_ISSUER=issuer
     depends_on:
       - db
       - rabbitmq
