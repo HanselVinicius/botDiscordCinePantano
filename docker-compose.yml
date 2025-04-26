@@ -15,15 +15,19 @@ services:
       - '3000:3000'
     depends_on:
       - rabbitmq
+    restart: unless-stopped
   api:
-    context: ./cinePantanoApplication
-    dockerfile: Dockerfile
-    expose:
-      - '8080:8080'
-    container_name: api
-    working_dir: /opt/src/app
-    networks:
-      - cine_pantano_network
+      build:
+        context: ../cinePantanoApplication
+        dockerfile: Dockerfile
+      container_name: api
+      working_dir: /opt/src/app
+      networks:
+        - cine_pantano_network
+      ports:
+        - "8080:8080"
+      restart: unless-stopped
+
   rabbitmq:
     image: rabbitmq:3-management
     container_name: rabbitmq-cine-pantano
@@ -32,6 +36,8 @@ services:
       - '15672:15672'
     networks:
       - cine_pantano_network
+    restart: unless-stopped
+
   db:
     image: mariadb:latest
     container_name: db
@@ -45,6 +51,7 @@ services:
       - "3306:3306"
     networks:
       - cine_pantano_network
+    restart: unless-stopped
 
 volumes:
   mariadb-data:
@@ -55,3 +62,4 @@ volumes:
 networks:
   cine_pantano_network:
     driver: bridge
+
