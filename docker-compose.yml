@@ -11,6 +11,8 @@ services:
     command: sh -c "npm install -g pnpm && pnpm install --silent && pnpm run start:dev"
     networks:
       - cine_pantano_network
+    ports:
+      - '3000:3000'
     depends_on:
       - rabbitmq
 
