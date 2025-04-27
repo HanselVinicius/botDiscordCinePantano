@@ -4,7 +4,7 @@ import { Author } from '../..//domain/author/Author';
 import { Attachment } from '../../domain/message/Attachment';
 import { ClientEvents } from 'discord.js';
 import { InsertMessageOptionsDto } from './dto/InsertMessageOptionsDto';
-import { InsertMessageService } from 'src/domain/message/service/InsertMessageService';
+import { InsertMessageService } from '../../domain/message/service/insertMessageService';
 
 describe('MessageCommand', () => {
   let messageCommand: MessageCommand;
