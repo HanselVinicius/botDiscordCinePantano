@@ -1,6 +1,8 @@
+import { MovieStatus } from "../MovieStatus";
+
 export class GetMovieDto{
     constructor(
-        readonly isSeen:Boolean,
+        readonly movieStatus:MovieStatus,
         readonly limit:number,
         readonly page:number
     ){}

@@ -1,6 +1,11 @@
 import { InsertMovieService } from '../../domain/movie/service/InsertMovieService';
 import { InsertMovieDto } from 'src/entrypoint/movie/dto/InsertMovieDto';
 import { InsertMovieSubCommand } from './InsertMovieSubCommand';
+import { MovieStatus } from 'src/domain/movie/MovieStatus';
+import { Movie } from 'src/domain/movie/Movie';
+import { GetMovieSubCommand } from './GetMovieSubCommand';
+import { GetMovieService } from 'src/domain/movie/service/GetMovieService';
+import { GetMovieDto } from './dto/GetMovieDto';
 
 describe('MovieCommands', () => {
   describe('InsertMovieSubCommand', () => {
@@ -37,4 +42,63 @@ describe('MovieCommands', () => {
       );
     });
   });
+
+  describe('GetMovieSubCommand', () => {
+    let getMovieServiceMock: jest.Mocked<GetMovieService>;
+    let getMovieSubCommand: GetMovieSubCommand;
+    const mockChannel = {
+      send: jest.fn(),
+    };
+    const interactionMock: any = [{
+      channel: mockChannel
+    }];
+
+    const movieDto: GetMovieDto = {
+      is_seen: false,
+      limit: 10,
+      page: 1,
+    };
+
+    beforeEach(() => {
+      getMovieServiceMock = {
+        getMovieList: jest.fn(),
+      } as unknown as jest.Mocked<GetMovieService>;
+
+      getMovieSubCommand = new GetMovieSubCommand(getMovieServiceMock);
+      jest.clearAllMocks();
+    });
+
+    it('should return a message if no movies found', async () => {
+      getMovieServiceMock.getMovieList.mockResolvedValueOnce([]);
+
+      const result = await getMovieSubCommand.execute(movieDto, interactionMock);
+
+      expect(result).toBe('Nenhum filme encontrado');
+      expect(mockChannel.send).not.toHaveBeenCalled();
+    });
+
+    it('should send messages for each movie and return summary message', async () => {
+      const movieList: Movie[] = [
+        {
+          id: 1,
+          title: 'Coringa',
+          duration: 122,
+          image: 'http://image.url',
+          launchDate: null,
+          movieStatus: MovieStatus.TO_WATCH,
+          review: [],
+        }
+      ];
+
+      getMovieServiceMock.getMovieList.mockResolvedValueOnce(movieList);
+
+      const result = await getMovieSubCommand.execute(movieDto, interactionMock);
+
+      expect(result).toBe('Listado todos os filmes...');
+      expect(mockChannel.send).toHaveBeenCalledWith(
+        `Title: Coringa - Poster: http://image.url - Status: TO_WATCH`
+      );
+    });
+  });
+
 });
