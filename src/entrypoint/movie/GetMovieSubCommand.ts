@@ -26,7 +26,7 @@ export class GetMovieSubCommand {
         const movies = await this.getMovieService.getMovieList(MovieMapper.toDomainGetMovieDto(options.is_seen,options.limit,options.page));
         const channel = args[0].channel;
         movies.forEach((movie) => {
-            channel.send(`Title: ${movie.title} - Poster: ${movie.image} - Seen: ${movie.status}`);
+            channel.send(`Title: ${movie.title} - Poster: ${movie.image} - Status: ${movie.movieStatus}`);
         });
         return "Listado todos os filmes...";
     }
