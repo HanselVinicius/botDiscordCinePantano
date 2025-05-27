@@ -6,6 +6,8 @@ describe('GetMovieGatewayImpl', () => {
         // arrange
         const movieRepository = {
             getMovieList: jest.fn().mockResolvedValue([]),
+            watchMovie: jest.fn().mockResolvedValue([]),
+
         };
         const getMovieGatewayImpl = new GetMovieGatewayImpl(movieRepository);
         const getMovieDto = new GetMovieDto(true, 10, 1);

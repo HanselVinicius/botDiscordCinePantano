@@ -9,4 +9,10 @@ export class MovieRepositoryImpl implements MovieRepository{
         const result = await this.request.getAuthenticated<Movie[]>(`v1/movie?page=${options.page}&limit=${options.limit}`,process.env.INTEGRATION_TOKEN); 
         return result;
     }
+
+    public async watchMovie(externalId:string): Promise<Movie[]> {
+        const result = await this.request.patchAuthenticated<Movie[]>(`v1/movie/watch?${externalId}`, process.env.INTEGRATION_TOKEN);
+        return result;
+    }
+
 }

@@ -16,5 +16,13 @@ export class ApiRequestHandler {
         }).then(res => res.data);
     }
 
+    public async patchAuthenticated<T>(url:string,token:string): Promise<T> {
+        return this.axios.patch(url, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }).then(res => res.data);
+    }
+
 
 }
