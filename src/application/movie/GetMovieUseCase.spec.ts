@@ -2,6 +2,7 @@ import { GetMovieUseCase } from './GetMovieUseCase';
 import { GetMovieDto } from '../../domain/movie/dto/GetMovieDto';
 import { Movie } from '../../domain/movie/Movie';
 import { GetMovieGateway } from '../gateway/movie/GetMovieGateway';
+import { MovieStatus } from 'src/domain/movie/MovieStatus';
 
 describe('GetMovieUseCase', () => {
     let mockGetMovieGateway: jest.Mocked<GetMovieGateway>;
@@ -16,7 +17,7 @@ describe('GetMovieUseCase', () => {
 
     it('deve chamar getMovieList no GetMovieGateway e retornar lista de filmes', async () => {
         const getMovieDto: GetMovieDto = {
-            isSeen: false,
+            movieStatus: MovieStatus.TO_WATCH,
             limit: 10,
             page: 1,
         };
@@ -36,7 +37,7 @@ describe('GetMovieUseCase', () => {
 
     it('deve lançar um erro quando o GetMovieGateway falhar', async () => {
         const getMovieDto: GetMovieDto = {
-            isSeen: false,
+            movieStatus: MovieStatus.TO_WATCH,
             limit: 10,
             page: 1,
         };

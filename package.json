@@ -62,13 +62,13 @@
       "json",
       "ts"
     ],
-    "rootDir": ".",
+    "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
     "moduleNameMapper": {
-      "^src/(.*)$": "<rootDir>/src/$1"
+      "^src/(.*)$": "<rootDir>/$1"
     },
     "coverageThreshold": {
       "global": {
@@ -79,8 +79,7 @@
       }
     },
     "collectCoverageFrom": [
-      "src/**/*.ts",
-      "!src/**/*.d.ts" 
+      "**/*.(t|j)s"
     ],
     "coveragePathIgnorePatterns": [
       "/node_modules/",

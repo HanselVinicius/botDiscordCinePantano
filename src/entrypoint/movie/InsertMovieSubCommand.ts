@@ -3,7 +3,7 @@ import { SlashCommandPipe } from '@discord-nestjs/common';
 import { InsertMovieService } from '../../domain/movie/service/InsertMovieService';
 import { MovieFactory } from '../../domain/movie/factory/MovieFactory';
 import { Inject } from '@nestjs/common';
-import { InsertMovieDto } from './dto/InsertMovieDto';
+import { InsertMovieDto } from 'src/domain/movie/dto/InsertMovieDto';
 
 @SubCommand({
   name: 'add',

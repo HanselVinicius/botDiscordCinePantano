@@ -6,7 +6,7 @@ export class Movie {
     public readonly title: string,
     public readonly launchDate: Date,
     public readonly duration: number,
-    public status: MovieStatus = MovieStatus.TO_WATCH,
+    public movieStatus: MovieStatus = MovieStatus.TO_WATCH,
     public readonly id?: number,
     public readonly review?: Review[],
     public readonly image?: string

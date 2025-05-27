@@ -23,10 +23,13 @@ export class GetMovieSubCommand {
         @EventParams() args: ClientEvents['interactionCreate'],
         
     ): Promise<String> {
+
         const movies = await this.getMovieService.getMovieList(MovieMapper.toDomainGetMovieDto(options.is_seen,options.limit,options.page));
         const channel = args[0].channel;
+        if (!movies || movies.length === 0)
+            return "Nenhum filme encontrado";
         movies.forEach((movie) => {
-            channel.send(`Title: ${movie.title} - Poster: ${movie.image} - Seen: ${movie.status}`);
+            channel.send(`Title: ${movie.title} - Poster: ${movie.image} - Status: ${movie.movieStatus}`);
         });
         return "Listado todos os filmes...";
     }

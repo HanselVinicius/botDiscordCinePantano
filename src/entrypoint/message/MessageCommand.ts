@@ -7,7 +7,8 @@ import { InsertMessageDto } from '../../domain/message/dto/InsertMessageDto';
 import { MessageFactory } from '../../domain/message/factory/MessageFactory';
 import { SlashCommandPipe } from '@discord-nestjs/common';
 import { InsertMessageOptionsDto } from './dto/InsertMessageOptionsDto';
-import { InsertMessageService } from 'src/domain/message/service/InsertMessageService';
+import { InsertMessageService } from '../../domain/message/service/insertMessageService';
+
 @Command({
   name: 'scrap',
   description: 'Scraps a text channel',
