@@ -6,6 +6,8 @@ import { Movie } from 'src/domain/movie/Movie';
 import { GetMovieSubCommand } from './GetMovieSubCommand';
 import { GetMovieService } from 'src/domain/movie/service/GetMovieService';
 import { GetMovieDto } from './dto/GetMovieDto';
+import { WatchMovieService } from '../../domain/movie/service/WatchMovieService';
+import { WatchMovieSubCommand } from './WatchMovieSubCommand';
 
 describe('MovieCommands', () => {
   describe('InsertMovieSubCommand', () => {
@@ -98,6 +100,28 @@ describe('MovieCommands', () => {
       expect(mockChannel.send).toHaveBeenCalledWith(
         `Title: Coringa - Poster: http://image.url - Status: TO_WATCH`
       );
+    });
+  });
+
+
+  describe('WatchMovieSubcommand', () => {
+    let watchMovieServiceMock: jest.Mocked<WatchMovieService>;
+    let watchMovieSubCommand: WatchMovieSubCommand;
+    beforeEach(() => {
+      watchMovieServiceMock = {
+        watchMovie: jest.fn().mockResolvedValueOnce(undefined),
+      } as jest.Mocked<WatchMovieService>;
+
+      watchMovieSubCommand = new WatchMovieSubCommand(watchMovieServiceMock);
+
+    });
+
+    it('should call watchMovieService', () => {
+      const externalId = '12345';
+
+      watchMovieSubCommand.execute(externalId);
+
+      expect(watchMovieServiceMock.watchMovie).toHaveBeenCalledWith(externalId);
     });
   });
 

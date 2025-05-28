@@ -11,9 +11,8 @@ export class MovieRepositoryImpl implements MovieRepository{
         return result;
     }
 
-    public async watchMovie(externalId:string): Promise<Movie[]> {
-        const result = await this.request.patchAuthenticated<Movie[]>(`v1/movie/watch?${externalId}`, process.env.INTEGRATION_TOKEN);
-        return result;
+    public async watchMovie(externalId:string): Promise<void> {
+        await this.request.patchAuthenticated<Movie[]>(`v1/movie/watch?${externalId}`, process.env.INTEGRATION_TOKEN);
     }
 
 }
