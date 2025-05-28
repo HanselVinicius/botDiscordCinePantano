@@ -1,13 +1,13 @@
 import { InsertMovieService } from '../../domain/movie/service/InsertMovieService';
-import { InsertMovieDto } from 'src/entrypoint/movie/dto/InsertMovieDto';
 import { InsertMovieSubCommand } from './InsertMovieSubCommand';
-import { MovieStatus } from 'src/domain/movie/MovieStatus';
-import { Movie } from 'src/domain/movie/Movie';
 import { GetMovieSubCommand } from './GetMovieSubCommand';
 import { GetMovieService } from 'src/domain/movie/service/GetMovieService';
 import { GetMovieDto } from './dto/GetMovieDto';
 import { WatchMovieService } from '../../domain/movie/service/WatchMovieService';
 import { WatchMovieSubCommand } from './WatchMovieSubCommand';
+import { InsertMovieDto } from './dto/insertMovieDto';
+import { Movie } from 'src/domain/movie/Movie';
+import { MovieStatus } from 'src/domain/movie/MovieStatus';
 
 describe('MovieCommands', () => {
   describe('InsertMovieSubCommand', () => {
