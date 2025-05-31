@@ -1,7 +1,7 @@
-import { Movie } from "src/domain/movie/Movie";
+import { Movie } from "../../../domain/movie/Movie";
 import { MovieRepository } from "./abstract/MovieRepository";
-import { ApiRequestHandler } from "src/gateway/infra/ApiRequestHandler";
-import { MovieStatus } from "src/domain/movie/MovieStatus";
+import { ApiRequestHandler } from "../../infra/ApiRequestHandler";
+import { MovieStatus } from "../../../domain/movie/MovieStatus";
 
 export class MovieRepositoryImpl implements MovieRepository{
     constructor(private readonly request:ApiRequestHandler) { }
@@ -12,7 +12,7 @@ export class MovieRepositoryImpl implements MovieRepository{
     }
 
     public async watchMovie(externalId:string): Promise<void> {
-        await this.request.patchAuthenticated<Movie[]>(`v1/movie/watch?${externalId}`, process.env.INTEGRATION_TOKEN);
+        await this.request.patchAuthenticated<Movie[]>(`v1/movie/${externalId}`, process.env.INTEGRATION_TOKEN);
     }
 
 }

@@ -1,13 +1,15 @@
 import { InsertMovieService } from '../../domain/movie/service/InsertMovieService';
-import { InsertMovieDto } from 'src/entrypoint/movie/dto/InsertMovieDto';
 import { InsertMovieSubCommand } from './InsertMovieSubCommand';
-import { MovieStatus } from 'src/domain/movie/MovieStatus';
-import { Movie } from 'src/domain/movie/Movie';
+
 import { GetMovieSubCommand } from './GetMovieSubCommand';
 import { GetMovieService } from 'src/domain/movie/service/GetMovieService';
 import { GetMovieDto } from './dto/GetMovieDto';
 import { WatchMovieService } from '../../domain/movie/service/WatchMovieService';
 import { WatchMovieSubCommand } from './WatchMovieSubCommand';
+import { WatchMovieDto } from './dto/WatchMovieDto';
+import { MovieStatus } from '../../domain/movie/MovieStatus';
+import { Movie } from '../../domain/movie/Movie';
+import { InsertMovieDto } from './dto/InsertMovieDto';
 
 describe('MovieCommands', () => {
   describe('InsertMovieSubCommand', () => {
@@ -98,7 +100,7 @@ describe('MovieCommands', () => {
 
       expect(result).toBe('Listado todos os filmes...');
       expect(mockChannel.send).toHaveBeenCalledWith(
-        `Title: Coringa - Poster: http://image.url - Status: TO_WATCH`
+        `Title: Coringa - Poster: http://image.url - Status: TO_WATCH - ExternalId: undefined`
       );
     });
   });
@@ -117,11 +119,12 @@ describe('MovieCommands', () => {
     });
 
     it('should call watchMovieService', () => {
-      const externalId = '12345';
+      const watchMovieDto = new WatchMovieDto();
+      watchMovieDto.externalId = '12345';
 
-      watchMovieSubCommand.execute(externalId);
+      watchMovieSubCommand.execute(watchMovieDto);
 
-      expect(watchMovieServiceMock.watchMovie).toHaveBeenCalledWith(externalId);
+      expect(watchMovieServiceMock.watchMovie).toHaveBeenCalledWith(watchMovieDto.externalId);
     });
   });
 

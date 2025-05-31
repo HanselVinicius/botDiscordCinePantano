@@ -1,10 +1,10 @@
 import { SlashCommandPipe } from "@discord-nestjs/common";
 import { EventParams, Handler, IA, SubCommand } from "@discord-nestjs/core";
 import { GetMovieDto } from "./dto/GetMovieDto";
-import { GetMovieService } from "src/domain/movie/service/GetMovieService";
-import { MovieMapper } from "src/shared/movie/MovieMapper";
 import { Inject } from "@nestjs/common";
 import { ClientEvents } from "discord.js";
+import { GetMovieService } from "../../domain/movie/service/GetMovieService";
+import { MovieMapper } from "../../shared/movie/MovieMapper";
 
 @SubCommand({
     name: 'read',
@@ -29,7 +29,7 @@ export class GetMovieSubCommand {
         if (!movies || movies.length === 0)
             return "Nenhum filme encontrado";
         movies.forEach((movie) => {
-            channel.send(`Title: ${movie.title} - Poster: ${movie.image} - Status: ${movie.movieStatus}`);
+            channel.send(`Title: ${movie.title} - Poster: ${movie.image} - Status: ${movie.movieStatus} - ExternalId: ${movie.externalId}`);
         });
         return "Listado todos os filmes...";
     }

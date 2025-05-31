@@ -1,7 +1,8 @@
 import { SlashCommandPipe } from "@discord-nestjs/common";
 import { Handler, IA, SubCommand } from "@discord-nestjs/core";
 import { Inject } from "@nestjs/common";
-import { WatchMovieService } from "src/domain/movie/service/WatchMovieService";
+import { WatchMovieService } from "../../domain/movie/service/WatchMovieService";
+import { WatchMovieDto } from "./dto/WatchMovieDto";
 
 @SubCommand({
     name: 'watch',
@@ -16,10 +17,10 @@ export class WatchMovieSubCommand {
 
     @Handler()
     public async execute(
-        @IA(SlashCommandPipe) externalId: string,
+        @IA(SlashCommandPipe)  watchMovieDto: WatchMovieDto,
     ): Promise<String> {
         try {
-            await this.watchMovieService.watchMovie(externalId);
+            await this.watchMovieService.watchMovie(watchMovieDto.externalId);
             return "Filme assistido com sucesso!";
         } catch (error) {
             console.error("Error watching movie:", error);

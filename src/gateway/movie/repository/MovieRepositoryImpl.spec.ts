@@ -1,7 +1,7 @@
-import { ApiRequestHandler } from "src/gateway/infra/ApiRequestHandler";
 import { MovieRepositoryImpl } from "./MovieRepositoryImpl";
 import { Movie } from "../../../domain/movie/Movie";
 import { MovieStatus } from "../../../domain/movie/MovieStatus";
+import { ApiRequestHandler } from "../../infra/ApiRequestHandler";
 
 
 describe('MovieRepositoryImpl', () => {
@@ -34,7 +34,7 @@ describe('MovieRepositoryImpl', () => {
         await movieRepositoryImpl.watchMovie(externalId);
 
         // assert
-        expect(request.patchAuthenticated).toHaveBeenCalledWith(`v1/movie/watch?${externalId}`, process.env.INTEGRATION_TOKEN);
+        expect(request.patchAuthenticated).toHaveBeenCalledWith(`v1/movie/${externalId}`, process.env.INTEGRATION_TOKEN);
     });
 
 });
