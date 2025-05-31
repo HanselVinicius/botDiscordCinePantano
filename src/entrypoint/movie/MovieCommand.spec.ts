@@ -1,6 +1,5 @@
 import { InsertMovieService } from '../../domain/movie/service/InsertMovieService';
 import { InsertMovieSubCommand } from './InsertMovieSubCommand';
-
 import { GetMovieSubCommand } from './GetMovieSubCommand';
 import { GetMovieService } from 'src/domain/movie/service/GetMovieService';
 import { GetMovieDto } from './dto/GetMovieDto';
