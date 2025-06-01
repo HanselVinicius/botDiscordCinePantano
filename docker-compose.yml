@@ -13,7 +13,7 @@ services:
       - AMQP_URL=amqp://user:rabbitmqPW@rabbitmq:5672
       - API_URL=http://api:8080
       - INTEGRATION_TOKEN=integration_token
-    command: sh -c "npm install -g pnpm && pnpm install --silent && pnpm run start:dev"
+    command: sh -c "npm install -g pnpm && pnpm install --silent && pnpm run start:prod"
     networks:
       - cine_pantano_network
     ports:
